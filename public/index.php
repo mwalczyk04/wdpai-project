@@ -14,6 +14,8 @@ $routing = new Routing();
 $routing->get('/', DefaultController::class, 'index');
 $routing->get('/decks', DeckController::class, 'index');
 $routing->get('/decks/{id}', DeckController::class, 'show');
+$routing->get('/decks/create', DeckController::class, 'create');
+$routing->get('/forum', DefaultController::class, 'forum');
 
 $routeFound = $routing->dispatch(
     $_SERVER['REQUEST_METHOD'],

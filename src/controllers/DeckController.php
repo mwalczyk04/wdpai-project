@@ -18,6 +18,20 @@ final class DeckController extends AppController
         $this->render('deck', [
         'pageTitle' => 'Szczegóły talii',
         'deckId' => $id,
-    ]);
+        ]);
+    }
+
+    public function create(): void
+    {
+        $this->render('deck-create', [
+            'pageTitle' => 'Nowa talia'
+        ]);
+    }
+
+    public function forum(): void
+    {
+        $this->render('forum', [
+            'pageTitle' => 'Forum'
+        ]);
     }
 }

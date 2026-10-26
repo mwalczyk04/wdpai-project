@@ -15,6 +15,13 @@ final class DefaultController extends AppController
         ]);
     }
 
+    public function forum(): void
+    {
+        $this->render('forum', [
+            'pageTitle' => 'VocabHub — Forum',
+        ]);
+    }
+
     public function notFound(): void
     {
         $this->render('not-found', [
