@@ -9,7 +9,9 @@ final class DefaultController extends AppController
     public function index(): void
     {
         $this->render('home', [
-            'pageTitle' => 'Moja aplikacja',
+            'pageTitle' => 'VocabHub — Pulpit',
+            'userName' => 'Michał',
+            'dueCardsCount' => 15,
         ]);
     }
 
