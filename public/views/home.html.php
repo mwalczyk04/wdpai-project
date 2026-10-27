@@ -19,6 +19,7 @@
             </nav>
             <div class="header-utils">
                 <span>PL | EN</span>
+                <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Przełącz motyw">🌙</button>
                 <span class="avatar-badge">MW</span>
             </div>
         </div>
