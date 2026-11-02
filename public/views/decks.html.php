@@ -4,58 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle) ?></title>
+    <link rel="stylesheet" href="/css/style.css?v=2">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/">Pulpit</a>
-            <a href="/decks" aria-current="page">Talie</a>
-            <a href="/forum">Forum</a>
-        </nav>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="/" class="logo">VocabHub</a>
+            <nav aria-label="Główna nawigacja">
+                <ul class="nav-links">
+                    <li><a href="/">Pulpit</a></li>
+                    <li><a href="/decks" aria-current="page">Talie</a></li>
+                    <li><a href="/forum">Forum</a></li>
+                </ul>
+            </nav>
+            <div class="header-utils">
+                <span>PL | EN</span>
+                <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Przełącz motyw">🌙</button>
+                <span class="avatar-badge">MW</span>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <h1>Przeglądaj talie</h1>
+    <main class="container main-content">
+        <header class="page-header">
+            <h1 class="page-title">Przeglądaj talie</h1>
+            <p class="page-subtitle">Odkrywaj kolekcje fiszek do nauki języków</p>
+        </header>
 
-        <section aria-label="Wyszukiwanie i filtry">
-            <form action="/decks" method="get">
-                <input type="search" name="search" placeholder="Szukaj talii...">
-                
-                <label for="lang">Język:</label>
-                <select id="lang" name="lang">
-                    <option value="">Wszystkie</option>
-                    <option value="es">Hiszpański</option>
-                    <option value="en">Angielski</option>
-                </select>
+        <section class="catalog-toolbar" aria-label="Wyszukiwarka i filtry">
+            <div class="search-wrapper">
+                <input type="search" placeholder="Szukaj talii po słowie kluczowym..." class="search-input">
+            </div>
 
-                <label for="level">Poziom:</label>
-                <select id="level" name="level">
-                    <option value="">Wszystkie</option>
-                    <option value="A1">A1</option>
-                    <option value="B2">B2</option>
-                </select>
+            <div class="filters-row">
+                <div class="filters-left">
+                    <select class="filter-select" aria-label="Wybierz język">
+                        <option value="">Wszystkie języki</option>
+                        <option value="es">Hiszpański</option>
+                        <option value="en">Angielski</option>
+                        <option value="de">Niemiecki</option>
+                        <option value="it">Włoski</option>
+                    </select>
 
-                <button type="submit">Szukaj</button>
-            </form>
+                    <div class="level-group" role="group" aria-label="Filtruj po poziomie trudności">
+                        <button type="button" class="level-btn active">Wszystkie</button>
+                        <button type="button" class="level-btn">A1</button>
+                        <button type="button" class="level-btn">A2</button>
+                        <button type="button" class="level-btn">B1</button>
+                        <button type="button" class="level-btn">B2</button>
+                    </div>
+                </div>
+
+                <div class="filters-right">
+                    <select class="filter-select" aria-label="Sortowanie">
+                        <option value="popular">Najpopularniejsze</option>
+                        <option value="newest">Najnowsze</option>
+                        <option value="alphabetical">Alfabetycznie</option>
+                    </select>
+                </div>
+            </div>
         </section>
 
-        <section aria-label="Lista talii">
-            <article>
-                <h2>Spanish Basics</h2>
-                <p>Poziom: A1 · 40 kart</p>
-                <a href="/decks/1">Szczegóły</a>
+        <section class="deck-grid" aria-label="Lista talii">
+            <article class="card">
+                <header class="card-tags">
+                    <span class="badge">ES</span>
+                    <span class="badge">Level A1</span>
+                </header>
+                <h2 class="card-title">Spanish Basics</h2>
+                <p class="card-meta">40 kart · Podstawowe zwroty</p>
+                <a href="/decks/1" class="btn btn-outline">Ucz się</a>
             </article>
-            <article>
-                <h2>Business English</h2>
-                <p>Poziom: B2 · 75 kart</p>
-                <a href="/decks/2">Szczegóły</a>
+
+            <article class="card">
+                <header class="card-tags">
+                    <span class="badge">EN</span>
+                    <span class="badge">Level B2</span>
+                </header>
+                <h2 class="card-title">Business English</h2>
+                <p class="card-meta">75 kart · Negocjacje i prezentacje</p>
+                <a href="/decks/2" class="btn btn-outline">Ucz się</a>
+            </article>
+
+            <article class="card">
+                <header class="card-tags">
+                    <span class="badge">EN</span>
+                    <span class="badge">Level A2</span>
+                </header>
+                <h2 class="card-title">Travel Phrases</h2>
+                <p class="card-meta">30 kart · Lotnisko i transport</p>
+                <a href="/decks/3" class="btn btn-outline">Ucz się</a>
+            </article>
+
+            <article class="card">
+                <header class="card-tags">
+                    <span class="badge">DE</span>
+                    <span class="badge">Level A1</span>
+                </header>
+                <h2 class="card-title">German Verbs</h2>
+                <p class="card-meta">50 kart · Czasowniki nieregularne</p>
+                <a href="/decks/1" class="btn btn-outline">Ucz się</a>
+            </article>
+
+            <article class="card">
+                <header class="card-tags">
+                    <span class="badge">IT</span>
+                    <span class="badge">Level B1</span>
+                </header>
+                <h2 class="card-title">Italian Food & Dining</h2>
+                <p class="card-meta">35 kart · Gastronomia i restauracja</p>
+                <a href="/decks/1" class="btn btn-outline">Ucz się</a>
+            </article>
+
+            <article class="card">
+                <header class="card-tags">
+                    <span class="badge">ES</span>
+                    <span class="badge">Level B2</span>
+                </header>
+                <h2 class="card-title">Subjunctive Mood</h2>
+                <p class="card-meta">60 kart · Zaawansowana gramatyka</p>
+                <a href="/decks/1" class="btn btn-outline">Ucz się</a>
             </article>
         </section>
 
-        <nav aria-label="Paginacja">
-            <a href="/decks?page=1">Poprzednia</a>
-            <span>1 z 3</span>
-            <a href="/decks?page=2">Następna</a>
+        <nav class="pagination" aria-label="Paginacja">
+            <a href="/decks" class="btn btn-outline" style="width: auto; padding: 0.4rem 0.8rem; font-size: 0.85rem;">← Poprzednia</a>
+            <span class="pagination-info">Strona 1 z 4</span>
+            <a href="/decks" class="btn btn-outline" style="width: auto; padding: 0.4rem 0.8rem; font-size: 0.85rem;">Następna →</a>
         </nav>
     </main>
 </body>

@@ -1,0 +1,138 @@
+.deck-create-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.deck-create-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.form-box {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.form-box-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.field-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.field-input,
+.field-select {
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.625rem 0.85rem;
+  width: 100%;
+}
+
+.field-input:focus-visible,
+.field-select:focus-visible {
+  border-color: var(--color-brand);
+}
+
+.grid-two-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+.upload-card-box {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-background);
+}
+
+.upload-card-box p {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.cards-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-2);
+}
+
+.card-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+}
+
+.btn-delete-card {
+  align-self: flex-end;
+  background: transparent;
+  border: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+}
+
+.btn-delete-card:hover {
+  color: #ef4444;
+}
+
+@media (min-width: 48rem) {
+  .deck-create-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .grid-two-cols {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card-row {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .card-row .form-field {
+    flex: 1;
+  }
+
+  .btn-delete-card {
+    align-self: center;
+    margin-bottom: 0.25rem;
+  }
+}

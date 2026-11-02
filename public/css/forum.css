@@ -1,0 +1,205 @@
+.forum-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.breadcrumbs {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.breadcrumbs a:hover {
+  color: var(--color-brand);
+}
+
+.thread-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.author-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.author-avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: var(--color-brand-subtle);
+  color: var(--color-brand);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+.author-avatar.admin {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  font-size: 0.875rem;
+}
+
+.author-name {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.role-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-background);
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.role-badge.admin {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+.post-time {
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+}
+
+.question-title {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.post-body {
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.thread-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.thread-tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-brand);
+  background-color: var(--color-brand-subtle);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.thread-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-2);
+}
+
+.thread-stats {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.replies-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.replies-heading {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.reply-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.reply-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.btn-upvote {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-upvote:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+.reply-editor-box {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.reply-textarea {
+  width: 100%;
+  min-height: 7rem;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+}
+
+.reply-textarea:focus-visible {
+  border-color: var(--color-brand);
+}
+
+.editor-actions {
+  display: flex;
+  justify-content: flex-end;
+}
