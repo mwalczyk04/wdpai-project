@@ -7,23 +7,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-content">
-            <a href="/" class="logo">VocabHub</a>
-            <nav aria-label="Główna nawigacja">
-                <ul class="nav-links">
-                    <li><a href="/" aria-current="page">Pulpit</a></li>
-                    <li><a href="/decks">Talie</a></li>
-                    <li><a href="/forum">Forum</a></li>
-                </ul>
-            </nav>
-            <div class="header-utils">
-                <span>PL | EN</span>
-                <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Przełącz motyw">🌙</button>
-                <span class="avatar-badge">MW</span>
-            </div>
-        </div>
-    </header>
+    <?php include __DIR__ . '/components/header.html.php'; ?>
 
     <main class="container main-content">
         <section class="hero-card" aria-labelledby="welcome-heading">
