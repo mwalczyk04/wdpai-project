@@ -13,7 +13,7 @@ $currentUri = (string) (parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) 
         </nav>
         <div class="header-utils">
             <span>PL | EN</span>
-            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Przełącz motyw">🌙</button>
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Włącz ciemny motyw" aria-pressed="false" title="Zmień motyw">🌙</button>
             <span class="avatar-badge">MW</span>
         </div>
     </div>

@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --color-brand: #5b4df3;
   --color-brand-hover: #493bd6;
   --color-brand-subtle: #f0effe;
@@ -21,6 +22,7 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --color-brand: #7c70ff;
   --color-brand-hover: #968dff;
   --color-brand-subtle: #24204d;
