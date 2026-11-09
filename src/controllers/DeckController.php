@@ -16,22 +16,25 @@ final class DeckController extends AppController
     public function show(int $id): void
     {
         $this->render('deck', [
-        'pageTitle' => 'Szczegóły talii',
-        'deckId' => $id,
+            'pageTitle' => 'Szczegóły talii',
+            'deckId' => $id,
+            'styles' => ['/css/study.css'],
         ]);
     }
 
     public function create(): void
     {
         $this->render('deck-create', [
-            'pageTitle' => 'Nowa talia'
+            'pageTitle' => 'Nowa talia',
+            'styles' => ['/css/deck-create.css'],
         ]);
     }
 
     public function forum(): void
     {
         $this->render('forum', [
-            'pageTitle' => 'Forum'
+            'pageTitle' => 'Forum',
+            'styles' => ['/css/forum.css'],
         ]);
     }
 }

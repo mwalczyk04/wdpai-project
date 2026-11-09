@@ -19,6 +19,7 @@ final class DefaultController extends AppController
     {
         $this->render('forum', [
             'pageTitle' => 'VocabHub — Forum',
+            'styles' => ['/css/forum.css'],
         ]);
     }
 
@@ -26,6 +27,7 @@ final class DefaultController extends AppController
     {
         $this->render('not-found', [
             'pageTitle' => 'Nie znaleziono strony',
+            'hideHeader' => true,
         ]);
     }
 }

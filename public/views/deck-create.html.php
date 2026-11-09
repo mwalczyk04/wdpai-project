@@ -1,109 +1,82 @@
-<!doctype html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($pageTitle) ?></title>
+<main class="container main-content">
+    <form>
+        <div class="deck-create-header">
+            <h1 class="page-title">Utwórz nową talię</h1>
+            <div class="deck-create-actions">
+                <a href="/decks" class="btn btn-outline" style="width: auto;">Anuluj</a>
+                <button type="button" class="btn btn-primary">Zapisz talię</button>
+            </div>
+        </div>
 
-    <script>
-        (function () {
-            try {
-                const savedTheme = localStorage.getItem('theme');
-                const hasSavedTheme = savedTheme === 'light' || savedTheme === 'dark';
-                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                document.documentElement.dataset.theme = hasSavedTheme ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
-            } catch (e) {}
-        })();
-    </script>
-    
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <link rel="stylesheet" href="/css/deck-create.css">
-    <script src="/js/theme.js" defer></script>
-</head>
-<body>
-    <?php include __DIR__ . '/components/header.html.php'; ?>
+        <section class="form-box" aria-labelledby="general-info-heading">
+            <h2 id="general-info-heading" class="form-box-title">Informacje ogólne</h2>
 
-    <main class="container main-content">
-        <form>
-            <div class="deck-create-header">
-                <h1 class="page-title">Utwórz nową talię</h1>
-                <div class="deck-create-actions">
-                    <a href="/decks" class="btn btn-outline" style="width: auto;">Anuluj</a>
-                    <button type="button" class="btn btn-primary">Zapisz talię</button>
+            <div class="form-field">
+                <label for="deck-title" class="field-label">Tytuł talii</label>
+                <input type="text" id="deck-title" class="field-input">
+            </div>
+
+            <div class="grid-two-cols">
+                <div class="form-field">
+                    <label for="deck-lang" class="field-label">Język</label>
+                    <select id="deck-lang" class="field-select">
+                        <option>Angielski</option>
+                        <option>Hiszpański</option>
+                        <option>Niemiecki</option>
+                        <option>Włoski</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="deck-level" class="field-label">Poziom CEFR</label>
+                    <select id="deck-level" class="field-select">
+                        <option>A1</option>
+                        <option>A2</option>
+                        <option>B1</option>
+                        <option>B2</option>
+                    </select>
                 </div>
             </div>
 
-            <section class="form-box" aria-labelledby="general-info-heading">
-                <h2 id="general-info-heading" class="form-box-title">Informacje ogólne</h2>
+            <div class="form-field">
+                <span class="field-label">Okładka talii</span>
+                <div class="upload-dropzone">
+                    <span class="upload-icon">🖼️</span>
+                    <p class="upload-text">Przeciągnij plik okładki (PNG, JPG do 2MB)</p>
+                    <button type="button" class="btn btn-outline" style="width: auto;">Wybierz plik</button>
+                </div>
+            </div>
+        </section>
 
+        <section class="form-box" aria-labelledby="cards-section-heading">
+            <div class="cards-section-header">
+                <h2 id="cards-section-heading" class="form-box-title">Karty (2)</h2>
+                <button type="button" class="btn btn-outline" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.8125rem;">+ Dodaj kartę</button>
+            </div>
+
+            <div class="card-row">
                 <div class="form-field">
-                    <label for="deck-title" class="field-label">Tytuł talii</label>
-                    <input type="text" id="deck-title" class="field-input" >
+                    <label class="field-label">Przód (słowo)</label>
+                    <input type="text" class="field-input">
                 </div>
-
-                <div class="grid-two-cols">
-                    <div class="form-field">
-                        <label for="deck-lang" class="field-label">Język</label>
-                        <select id="deck-lang" class="field-select">
-                            <option>Angielski</option>
-                            <option>Hiszpański</option>
-                            <option>Niemiecki</option>
-                            <option>Włoski</option>
-                        </select>
-                    </div>
-
-                    <div class="form-field">
-                        <label for="deck-level" class="field-label">Poziom CEFR</label>
-                        <select id="deck-level" class="field-select">
-                            <option>A1 - Początkujący</option>
-                            <option>A2 - Podstawowy</option>
-                            <option>B1 - Średniozaawansowany</option>
-                            <option selected>B2 - Średniozaawansowany wyższy</option>
-                        </select>
-                    </div>
-                </div>
-
                 <div class="form-field">
-                    <span class="field-label">Zdjęcie okładki</span>
-                    <div class="upload-card-box">
-                        <p>Przeciągnij plik okładki lub kliknij, aby wybrać z dysku (PNG, JPG do 2MB)</p>
-                        <button type="button" class="btn btn-outline" style="width: auto; font-size: 0.8125rem;">Wybierz plik</button>
-                    </div>
+                    <label class="field-label">Tył (tłumaczenie)</label>
+                    <input type="text" class="field-input">
                 </div>
-            </section>
+                <button type="button" class="btn-delete-card" aria-label="Usuń wiersz">✕</button>
+            </div>
 
-            <section class="form-box" style="margin-top: var(--space-4);" aria-labelledby="cards-section-heading">
-                <div class="cards-section-header">
-                    <h2 id="cards-section-heading" class="form-box-title">Fiszki (2)</h2>
-                    <button type="button" class="btn btn-outline" style="width: auto; font-size: 0.8125rem;">+ Dodaj fiszkę</button>
+            <div class="card-row">
+                <div class="form-field">
+                    <label class="field-label">Przód (słowo)</label>
+                    <input type="text" class="field-input">
                 </div>
-
-                <div class="card-row">
-                    <div class="form-field">
-                        <label class="field-label">Przód (słowo)</label>
-                        <input type="text" class="field-input" >
-                    </div>
-                    <div class="form-field">
-                        <label class="field-label">Tył (tłumaczenie)</label>
-                        <input type="text" class="field-input" >
-                    </div>
-                    <button type="button" class="btn-delete-card" aria-label="Usuń wiersz">✕</button>
+                <div class="form-field">
+                    <label class="field-label">Tył (tłumaczenie)</label>
+                    <input type="text" class="field-input">
                 </div>
-
-                <div class="card-row">
-                    <div class="form-field">
-                        <label class="field-label">Przód (słowo)</label>
-                        <input type="text" class="field-input">
-                    </div>
-                    <div class="form-field">
-                        <label class="field-label">Tył (tłumaczenie)</label>
-                        <input type="text" class="field-input">
-                    </div>
-                    <button type="button" class="btn-delete-card" aria-label="Usuń wiersz">✕</button>
-                </div>
-            </section>
-        </form>
-    </main>
-
-</body>
-</html>
+                <button type="button" class="btn-delete-card" aria-label="Usuń wiersz">✕</button>
+            </div>
+        </section>
+    </form>
+</main>
