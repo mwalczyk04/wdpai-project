@@ -58,6 +58,8 @@ body {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   padding-block: var(--space-2);
+  position: relative;
+  z-index: 100;
 }
 
 .header-content {
@@ -108,6 +110,208 @@ body {
   color: var(--color-brand);
   font-weight: 600;
   border-radius: 50%;
+}
+
+.user-menu-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.avatar-btn {
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  line-height: 1;
+  padding: 0;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.avatar-btn:hover,
+.avatar-btn:focus-visible {
+  transform: scale(1.05);
+  border-color: var(--color-brand);
+  outline: none;
+}
+
+.avatar-btn[aria-expanded="true"] {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand) 25%, transparent);
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  width: 20rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 14px 35px -4px rgba(0, 0, 0, 0.18), 0 8px 16px -6px rgba(0, 0, 0, 0.12);
+  padding: var(--space-3);
+  z-index: 1000;
+  animation: dropdown-fade-in 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] .user-dropdown {
+  background-color: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.6), 0 8px 16px -4px rgba(0, 0, 0, 0.4);
+}
+
+.user-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 0.65rem;
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+  transform: rotate(45deg);
+}
+
+[data-theme="dark"] .user-dropdown::before {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.user-dropdown[hidden] {
+  display: none !important;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.login-header {
+  margin-bottom: var(--space-1);
+}
+
+.login-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.login-subtitle {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  margin-top: 0.25rem;
+}
+
+.login-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.login-form .form-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.login-form .form-label i {
+  color: var(--color-brand);
+  font-size: 0.85rem;
+  width: 1rem;
+  text-align: center;
+}
+
+.login-form .form-input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.875rem;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.login-form .form-input:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand) 20%, transparent);
+}
+
+.btn-block {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--space-1);
+}
+
+.user-profile-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.user-profile-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--color-brand-subtle);
+  color: var(--color-brand);
+  font-weight: 700;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.user-profile-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.user-profile-info strong {
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.user-profile-info small {
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.user-dropdown-divider {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin-block: var(--space-2);
+}
+
+.logout-form {
+  margin: 0;
+}
+
+.btn-logout {
+  width: 100%;
+  justify-content: center;
+  color: #ef4444;
+  border-color: color-mix(in srgb, #ef4444 30%, var(--color-border));
+}
+
+.btn-logout:hover {
+  background-color: color-mix(in srgb, #ef4444 10%, transparent);
+  border-color: #ef4444;
+  color: #dc2626;
 }
 
 .main-content {
