@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Controller\DefaultController;
 use App\Controller\DeckController;
+use App\Controller\DefaultController;
+use App\Controller\ForumController;
 use App\Routing;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -13,9 +14,9 @@ $routing = new Routing();
 // TU BĘDZIEMY DEFINIOWAĆ WSZYSTKIE TRASY WYSTĘPUJĄCE W NASZYM PROJEKCIE
 $routing->get('/', DefaultController::class, 'index');
 $routing->get('/decks', DeckController::class, 'index');
-$routing->get('/decks/{id}', DeckController::class, 'show');
 $routing->get('/decks/create', DeckController::class, 'create');
-$routing->get('/forum', DefaultController::class, 'forum');
+$routing->get('/decks/{id}', DeckController::class, 'show');
+$routing->get('/forum', ForumController::class, 'index');
 
 $routeFound = $routing->dispatch(
     $_SERVER['REQUEST_METHOD'],

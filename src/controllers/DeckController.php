@@ -29,12 +29,4 @@ final class DeckController extends AppController
             'styles' => ['/css/deck-create.css'],
         ]);
     }
-
-    public function forum(): void
-    {
-        $this->render('forum', [
-            'pageTitle' => 'Forum',
-            'styles' => ['/css/forum.css'],
-        ]);
-    }
 }

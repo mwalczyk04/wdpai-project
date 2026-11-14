@@ -1,8 +1,8 @@
 <main class="container main-content">
     <section class="hero-card" aria-labelledby="welcome-heading">
         <span class="hero-tag">Codzienna powtórka</span>
-        <h1 id="welcome-heading" class="hero-title">Cześć <?= htmlspecialchars($userName) ?>, gotowy do nauki?</h1>
-        <p>Masz dzisiaj do powtórzenia <strong><?= (int) $dueCardsCount ?></strong> słówek.</p>
+        <h1 id="welcome-heading" class="hero-title">Cześć <?= htmlspecialchars((string) ($userName ?? 'Gość'), ENT_QUOTES, 'UTF-8') ?>, gotowy do nauki?</h1>
+        <p>Masz dzisiaj do powtórzenia <strong><?= (int) ($dueCardsCount ?? 0) ?></strong> słówek.</p>
         <div>
             <a href="/decks/1" class="btn btn-primary">Rozpocznij powtórkę →</a>
         </div>
