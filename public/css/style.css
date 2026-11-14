@@ -182,66 +182,17 @@ body {
   display: none !important;
 }
 
-.login-form {
+.header-auth-actions {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.login-header {
-  margin-bottom: var(--space-1);
-}
-
-.login-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--color-text);
-  line-height: 1.2;
-}
-
-.login-subtitle {
-  font-size: 0.75rem;
-  color: var(--color-muted);
-  margin-top: 0.25rem;
-}
-
-.login-form .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.login-form .form-label {
-  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-text);
+  gap: var(--space-1);
 }
 
-.login-form .form-label i {
-  color: var(--color-brand);
-  font-size: 0.85rem;
-  width: 1rem;
-  text-align: center;
-}
-
-.login-form .form-input {
-  width: 100%;
-  padding: 0.55rem 0.75rem;
+.btn-sm {
+  width: auto;
+  padding: 0.4rem 0.85rem;
   font-size: 0.875rem;
-  background-color: var(--color-background);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.login-form .form-input:focus {
-  outline: none;
-  border-color: var(--color-brand);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand) 20%, transparent);
+  white-space: nowrap;
 }
 
 .btn-block {
