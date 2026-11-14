@@ -62,7 +62,7 @@
   gap: var(--space-3);
 }
 
-.upload-card-box {
+.upload-dropzone {
   border: 2px dashed var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
@@ -74,7 +74,12 @@
   background-color: var(--color-background);
 }
 
-.upload-card-box p {
+.upload-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.upload-dropzone .upload-text {
   font-size: 0.875rem;
   color: var(--color-muted);
 }

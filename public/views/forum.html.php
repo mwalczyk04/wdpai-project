@@ -1,6 +1,6 @@
 <main class="container main-content">
     <div class="forum-nav-bar">
-        <nav class="breadcrumbs" aria-label="Okruszki chleba">
+        <nav class="breadcrumbs" aria-label="Ścieżka nawigacji">
             <a href="/forum">Forum</a> > <span>Język angielski</span> > <span>Gramatyka</span>
         </nav>
         <a href="/decks" class="btn btn-outline" style="width: auto; font-size: 0.8125rem; padding: 0.35rem 0.75rem;">← Wróć do listy</a>
@@ -82,7 +82,7 @@
 
     <section class="reply-editor-box" aria-label="Twoja odpowiedź">
         <h2 class="replies-heading">Twoja odpowiedź</h2>
-        <textarea class="reply-textarea" placeholder="Napisz swoją odpowiedź..."></textarea>
+        <textarea class="reply-textarea" placeholder="Napisz swoją odpowiedź..." aria-label="Treść odpowiedzi"></textarea>
         <div class="editor-actions">
             <button type="button" class="btn btn-primary">Opublikuj odpowiedź</button>
         </div>

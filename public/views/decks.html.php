@@ -6,7 +6,7 @@
 
     <section class="catalog-toolbar" aria-label="Wyszukiwarka i filtry">
         <div class="search-wrapper">
-            <input type="search" placeholder="Szukaj talii po słowie kluczowym..." class="search-input">
+            <input type="search" placeholder="Szukaj talii po słowie kluczowym..." class="search-input" aria-label="Szukaj talii po słowie kluczowym">
         </div>
 
         <div class="filters-row">

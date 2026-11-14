@@ -558,8 +558,8 @@ a:focus-visible {
   }
 }
 
-.form-input,
-.form-select {
+.form-input {
+  width: 100%;
   font-family: inherit;
   font-size: 0.875rem;
   color: var(--color-text);
@@ -567,38 +567,6 @@ a:focus-visible {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 0.5rem 0.75rem;
-}
-
-.form-input {
-  width: 100%;
-}
-
-.filter-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.pills {
-  display: flex;
-  gap: 0.25rem;
-}
-
-.pill {
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.35rem 0.65rem;
-  border-radius: var(--radius-sm);
-  color: var(--color-muted);
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.pill.active {
-  background-color: var(--color-brand-subtle);
-  color: var(--color-brand);
 }
 
 .pagination {
@@ -612,17 +580,4 @@ a:focus-visible {
 .pagination-info {
   font-size: 0.875rem;
   color: var(--color-muted);
-}
-
-@media (min-width: 48rem) {
-  .filter-toolbar {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .search-box {
-    flex: 1;
-    max-width: 22rem;
-  }
 }

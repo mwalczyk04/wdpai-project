@@ -41,7 +41,7 @@
             <div class="form-field">
                 <span class="field-label">Okładka talii</span>
                 <div class="upload-dropzone">
-                    <span class="upload-icon">🖼️</span>
+                    <span class="upload-icon" aria-hidden="true">🖼️</span>
                     <p class="upload-text">Przeciągnij plik okładki (PNG, JPG do 2MB)</p>
                     <button type="button" class="btn btn-outline" style="width: auto;">Wybierz plik</button>
                 </div>
@@ -56,24 +56,24 @@
 
             <div class="card-row">
                 <div class="form-field">
-                    <label class="field-label">Przód (słowo)</label>
-                    <input type="text" class="field-input">
+                    <label for="card-front-1" class="field-label">Przód (słowo)</label>
+                    <input type="text" id="card-front-1" class="field-input">
                 </div>
                 <div class="form-field">
-                    <label class="field-label">Tył (tłumaczenie)</label>
-                    <input type="text" class="field-input">
+                    <label for="card-back-1" class="field-label">Tył (tłumaczenie)</label>
+                    <input type="text" id="card-back-1" class="field-input">
                 </div>
                 <button type="button" class="btn-delete-card" aria-label="Usuń wiersz">✕</button>
             </div>
 
             <div class="card-row">
                 <div class="form-field">
-                    <label class="field-label">Przód (słowo)</label>
-                    <input type="text" class="field-input">
+                    <label for="card-front-2" class="field-label">Przód (słowo)</label>
+                    <input type="text" id="card-front-2" class="field-input">
                 </div>
                 <div class="form-field">
-                    <label class="field-label">Tył (tłumaczenie)</label>
-                    <input type="text" class="field-input">
+                    <label for="card-back-2" class="field-label">Tył (tłumaczenie)</label>
+                    <input type="text" id="card-back-2" class="field-input">
                 </div>
                 <button type="button" class="btn-delete-card" aria-label="Usuń wiersz">✕</button>
             </div>
