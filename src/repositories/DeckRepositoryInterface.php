@@ -14,6 +14,9 @@ interface DeckRepositoryInterface
     /** @return list<Deck> */
     public function findAll(): array;
 
+    /** @return list<Deck> */
+    public function findRecentPublished(int $limit = 3): array;
+
     public function find(int $id): ?Deck;
 
     public function save(Deck $deck): void;

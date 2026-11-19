@@ -4,22 +4,31 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Repository\DeckRepositoryInterface;
+
+/**
+ * Handles the home dashboard and fallback 404 view.
+ */
 final class DefaultController extends AppController
 {
+    public function __construct(private DeckRepositoryInterface $deckRepository)
+    {
+    }
+
     public function index(): void
     {
+        $recentDecks = $this->deckRepository->findRecentPublished(3);
+
         $this->render('home', [
             'pageTitle' => 'VocabHub — Pulpit',
             'userName' => 'Michał',
             'dueCardsCount' => 15,
+            'recentDecks' => $recentDecks,
         ]);
     }
 
     public function notFound(): void
     {
-        $this->render('not-found', [
-            'pageTitle' => 'Nie znaleziono strony',
-            'hideHeader' => true,
-        ]);
+        $this->renderNotFound();
     }
 }

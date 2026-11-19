@@ -38,6 +38,18 @@ abstract class AppController
     }
 
     /**
+     * Renders the 404 Not Found page with the matching HTTP status code.
+     */
+    protected function renderNotFound(): void
+    {
+        http_response_code(404);
+        $this->render('not-found', [
+            'pageTitle' => 'Nie znaleziono strony',
+            'hideHeader' => true,
+        ]);
+    }
+
+    /**
      * Sends an HTTP redirect response and terminates request execution.
      */
     protected function redirect(string $path, int $statusCode = 303): never

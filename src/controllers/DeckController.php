@@ -34,9 +34,15 @@ final class DeckController extends AppController
 
     public function show(int $id): void
     {
+        $deck = $this->deckRepository->find($id);
+        if ($deck === null) {
+            $this->renderNotFound();
+            return;
+        }
+
         $this->render('deck', [
-            'pageTitle' => 'Szczegóły talii',
-            'deckId' => $id,
+            'pageTitle' => $deck->getTitle() . ' — Szczegóły talii',
+            'deck' => $deck,
             'styles' => ['/css/study.css'],
         ]);
     }

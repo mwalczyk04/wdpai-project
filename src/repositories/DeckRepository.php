@@ -27,12 +27,23 @@ final class DeckRepository implements DeckRepositoryInterface
              ORDER BY created_at DESC, id DESC'
         );
 
-        $decks = [];
-        foreach ($statement->fetchAll() as $row) {
-            $decks[] = $this->mapRowToDeck($row);
-        }
+        return $this->mapRowsToDecks($statement->fetchAll());
+    }
 
-        return $decks;
+    /** @return list<Deck> */
+    public function findRecentPublished(int $limit = 3): array
+    {
+        $statement = $this->database->prepare(
+            "SELECT id, title, description, language, cefr_level, status, created_at, updated_at
+             FROM decks
+             WHERE status = 'published'
+             ORDER BY created_at DESC, id DESC
+             LIMIT :limit"
+        );
+        $statement->bindValue(':limit', max(1, $limit), PDO::PARAM_INT);
+        $statement->execute();
+
+        return $this->mapRowsToDecks($statement->fetchAll());
     }
 
     public function find(int $id): ?Deck
@@ -99,6 +110,15 @@ final class DeckRepository implements DeckRepositoryInterface
             'DELETE FROM decks WHERE id = :id'
         );
         $statement->execute(['id' => $id]);
+    }
+
+    /**
+     * @param list<array<string, mixed>> $rows
+     * @return list<Deck>
+     */
+    private function mapRowsToDecks(array $rows): array
+    {
+        return array_map($this->mapRowToDeck(...), $rows);
     }
 
     /** @param array<string, mixed> $row */

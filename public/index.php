@@ -15,12 +15,17 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $database = new Database();
 $csrfService = new CsrfService();
+$createDeckRepository = static fn (): DeckRepository => new DeckRepository($database->connect());
 
 $routing = new Routing();
 $routing->registerControllerFactory(
+    DefaultController::class,
+    static fn (): DefaultController => new DefaultController($createDeckRepository()),
+);
+$routing->registerControllerFactory(
     DeckController::class,
     static fn (): DeckController => new DeckController(
-        new DeckRepository($database->connect()),
+        $createDeckRepository(),
         $csrfService,
     ),
 );
@@ -44,6 +49,5 @@ $routeFound = $routing->dispatch(
 );
 
 if (!$routeFound) {
-    http_response_code(404);
-    (new DefaultController())->notFound();
+    (new DefaultController($createDeckRepository()))->notFound();
 }
