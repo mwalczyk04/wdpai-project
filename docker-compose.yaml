@@ -31,6 +31,10 @@ services:
       dockerfile: docker/php/Dockerfile
     volumes:
       - .:/app
+      - ./docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/99-xdebug.ini:ro
+      - ./docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - pg-network
   

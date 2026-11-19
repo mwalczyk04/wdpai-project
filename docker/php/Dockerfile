@@ -16,6 +16,7 @@ RUN apk add --no-cache \
         libpng-dev \
         libjpeg-turbo-dev \
         postgresql-dev \
+        linux-headers \
         $PHPIZE_DEPS \
     && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" \
@@ -25,6 +26,8 @@ RUN apk add --no-cache \
         bcmath \
         pgsql \
         pdo_pgsql \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
     && apk del .build-deps
 
 RUN { \
