@@ -10,6 +10,20 @@ final class Routing
 {
     private array $routes = [];
 
+    /** @var array<class-string<AppController>, callable(): AppController> */
+    private array $controllerFactories = [];
+
+    /**
+     * Registers a factory used to instantiate a controller with its dependencies.
+     *
+     * @param class-string<AppController> $controllerClass
+     * @param callable(): AppController $factory
+     */
+    public function registerControllerFactory(string $controllerClass, callable $factory): void
+    {
+        $this->controllerFactories[$controllerClass] = $factory;
+    }
+
     public function get(string $path, string $controller, string $action): void
     {
         $this->add('GET', $path, $controller, $action);
@@ -82,12 +96,7 @@ final class Routing
                 $parameters,
             );
 
-            $controllerClass = $route['controller'];
-            $controller = new $controllerClass();
-
-            if (!$controller instanceof AppController) {
-                throw new \RuntimeException('Invalid controller');
-            }
+            $controller = $this->instantiateController($route['controller']);
 
             $controller->{$route['action']}(...$parameters);
 
@@ -95,5 +104,18 @@ final class Routing
         }
 
         return false;
+    }
+
+    private function instantiateController(string $controllerClass): AppController
+    {
+        $controller = isset($this->controllerFactories[$controllerClass])
+            ? ($this->controllerFactories[$controllerClass])()
+            : new $controllerClass();
+
+        if (!$controller instanceof AppController) {
+            throw new \RuntimeException('Invalid controller');
+        }
+
+        return $controller;
     }
 }

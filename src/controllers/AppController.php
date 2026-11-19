@@ -36,4 +36,14 @@ abstract class AppController
 
         require $layoutPath;
     }
+
+    /**
+     * Sends an HTTP redirect response and terminates request execution.
+     */
+    protected function redirect(string $path, int $statusCode = 303): never
+    {
+        $safePath = str_replace(["\r", "\n"], '', $path);
+        header('Location: ' . $safePath, true, $statusCode);
+        exit;
+    }
 }
