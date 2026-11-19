@@ -1,39 +1,92 @@
+<?php
+$old = is_array($old ?? null) ? $old : [];
+$errors = is_array($errors ?? null) ? $errors : [];
+$languages = is_array($languages ?? null) ? $languages : [];
+$cefrLevels = is_array($cefrLevels ?? null) ? $cefrLevels : [];
+$statuses = is_array($statuses ?? null) ? $statuses : [];
+?>
 <main class="container main-content">
-    <form>
+    <form method="post" action="/decks/create">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars((string) ($csrfToken ?? ''), ENT_QUOTES, 'UTF-8') ?>">
+
         <div class="deck-create-header">
             <h1 class="page-title">Utwórz nową talię</h1>
             <div class="deck-create-actions">
                 <a href="/decks" class="btn btn-outline" style="width: auto;">Anuluj</a>
-                <button type="button" class="btn btn-primary">Zapisz talię</button>
+                <button type="submit" class="btn btn-primary">Zapisz talię</button>
             </div>
         </div>
+
+        <?php if ($errors !== []): ?>
+            <div class="form-errors" role="alert">
+                <strong>Popraw błędy formularza:</strong>
+                <ul>
+                    <?php foreach ($errors as $error): ?>
+                        <li><?= htmlspecialchars((string) $error, ENT_QUOTES, 'UTF-8') ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
         <section class="form-box" aria-labelledby="general-info-heading">
             <h2 id="general-info-heading" class="form-box-title">Informacje ogólne</h2>
 
             <div class="form-field">
                 <label for="deck-title" class="field-label">Tytuł talii</label>
-                <input type="text" id="deck-title" class="field-input">
+                <input
+                    type="text"
+                    id="deck-title"
+                    name="title"
+                    class="field-input"
+                    maxlength="150"
+                    required
+                    placeholder="np. Spanish Basics"
+                    value="<?= htmlspecialchars((string) ($old['title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                >
             </div>
 
-            <div class="grid-two-cols">
+            <div class="form-field">
+                <label for="deck-description" class="field-label">Opis talii (opcjonalny)</label>
+                <textarea
+                    id="deck-description"
+                    name="description"
+                    class="field-input"
+                    rows="3"
+                    placeholder="Krótki opis zakresu słownictwa w tej talii..."
+                ><?= htmlspecialchars((string) ($old['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
+            </div>
+
+            <div class="grid-three-cols">
                 <div class="form-field">
                     <label for="deck-lang" class="field-label">Język</label>
-                    <select id="deck-lang" class="field-select">
-                        <option>Angielski</option>
-                        <option>Hiszpański</option>
-                        <option>Niemiecki</option>
-                        <option>Włoski</option>
+                    <select id="deck-lang" name="language" class="field-select">
+                        <?php foreach ($languages as $code => $label): ?>
+                            <option value="<?= htmlspecialchars((string) $code, ENT_QUOTES, 'UTF-8') ?>"<?= ($old['language'] ?? 'en') === $code ? ' selected' : '' ?>>
+                                <?= htmlspecialchars((string) $label, ENT_QUOTES, 'UTF-8') ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
                 <div class="form-field">
                     <label for="deck-level" class="field-label">Poziom CEFR</label>
-                    <select id="deck-level" class="field-select">
-                        <option>A1</option>
-                        <option>A2</option>
-                        <option>B1</option>
-                        <option>B2</option>
+                    <select id="deck-level" name="cefr_level" class="field-select">
+                        <?php foreach ($cefrLevels as $level): ?>
+                            <option value="<?= htmlspecialchars((string) $level, ENT_QUOTES, 'UTF-8') ?>"<?= ($old['cefr_level'] ?? 'A1') === $level ? ' selected' : '' ?>>
+                                <?= htmlspecialchars((string) $level, ENT_QUOTES, 'UTF-8') ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="deck-status" class="field-label">Status</label>
+                    <select id="deck-status" name="status" class="field-select">
+                        <?php foreach ($statuses as $code => $label): ?>
+                            <option value="<?= htmlspecialchars((string) $code, ENT_QUOTES, 'UTF-8') ?>"<?= ($old['status'] ?? 'published') === $code ? ' selected' : '' ?>>
+                                <?= htmlspecialchars((string) $label, ENT_QUOTES, 'UTF-8') ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>

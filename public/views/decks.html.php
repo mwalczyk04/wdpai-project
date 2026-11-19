@@ -1,7 +1,18 @@
+<?php
+
+use App\Model\Deck;
+
+$decks = is_array($decks ?? null) ? $decks : [];
+$statusLabels = Deck::ALLOWED_STATUSES;
+$languageLabels = Deck::ALLOWED_LANGUAGES;
+?>
 <main class="container main-content">
-    <header class="page-header">
-        <h1 class="page-title">Przeglądaj talie</h1>
-        <p class="page-subtitle">Odkrywaj kolekcje fiszek do nauki języków</p>
+    <header class="page-header page-header-row">
+        <div>
+            <h1 class="page-title">Przeglądaj talie</h1>
+            <p class="page-subtitle">Odkrywaj kolekcje fiszek do nauki języków</p>
+        </div>
+        <a href="/decks/create" class="btn btn-primary">+ Utwórz talię</a>
     </header>
 
     <section class="catalog-toolbar" aria-label="Wyszukiwarka i filtry">
@@ -17,6 +28,7 @@
                     <option value="en">Angielski</option>
                     <option value="de">Niemiecki</option>
                     <option value="it">Włoski</option>
+                    <option value="fr">Francuski</option>
                 </select>
 
                 <div class="level-group" role="group" aria-label="Filtruj po poziomie trudności">
@@ -38,71 +50,48 @@
         </div>
     </section>
 
-    <section class="deck-grid" aria-label="Lista talii">
-        <article class="card">
-            <header class="card-tags">
-                <span class="badge">ES</span>
-                <span class="badge">Level A1</span>
-            </header>
-            <h2 class="card-title">Spanish Basics</h2>
-            <p class="card-meta">40 kart · Podstawowe zwroty</p>
-            <a href="/decks/1" class="btn btn-outline">Ucz się</a>
-        </article>
+    <?php if ($decks === []): ?>
+        <section class="card empty-state" aria-label="Brak talii">
+            <h2 class="card-title">Brak zapisanych talii w bazie</h2>
+            <p class="card-meta">Utwórz pierwszą talię fiszek, aby zapisać ją w PostgreSQL.</p>
+            <div>
+                <a href="/decks/create" class="btn btn-primary">+ Utwórz pierwszą talię</a>
+            </div>
+        </section>
+    <?php else: ?>
+        <section class="deck-grid" aria-label="Lista talii">
+            <?php foreach ($decks as $deck): ?>
+                <?php
+                $status = $deck->getStatus();
+                $statusLabel = $statusLabels[$status] ?? $status;
+                $statusClass = match ($status) {
+                    'published' => 'badge-status-published',
+                    'draft' => 'badge-status-draft',
+                    'archived' => 'badge-status-archived',
+                    default => '',
+                };
+                $language = $deck->getLanguage();
+                $languageLabel = $languageLabels[$language] ?? strtoupper($language);
+                $description = $deck->getDescription();
+                ?>
+                <article class="card">
+                    <header class="card-tags">
+                        <span class="badge"><?= htmlspecialchars(strtoupper($language), ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="badge">Level <?= htmlspecialchars($deck->getCefrLevel(), ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="badge badge-status <?= $statusClass ?>"><?= htmlspecialchars($statusLabel, ENT_QUOTES, 'UTF-8') ?></span>
+                    </header>
+                    <h2 class="card-title"><?= htmlspecialchars($deck->getTitle(), ENT_QUOTES, 'UTF-8') ?></h2>
+                    <p class="card-meta">
+                        <?= htmlspecialchars($languageLabel, ENT_QUOTES, 'UTF-8') ?> ·
+                        <?= htmlspecialchars($description !== null && $description !== '' ? $description : 'Brak opisu', ENT_QUOTES, 'UTF-8') ?>
+                    </p>
+                    <a href="/decks/<?= (int) $deck->getId() ?>" class="btn btn-outline">Ucz się</a>
+                </article>
+            <?php endforeach; ?>
+        </section>
+    <?php endif; ?>
 
-        <article class="card">
-            <header class="card-tags">
-                <span class="badge">EN</span>
-                <span class="badge">Level B2</span>
-            </header>
-            <h2 class="card-title">Business English</h2>
-            <p class="card-meta">75 kart · Negocjacje i prezentacje</p>
-            <a href="/decks/2" class="btn btn-outline">Ucz się</a>
-        </article>
-
-        <article class="card">
-            <header class="card-tags">
-                <span class="badge">EN</span>
-                <span class="badge">Level A2</span>
-            </header>
-            <h2 class="card-title">Travel Phrases</h2>
-            <p class="card-meta">30 kart · Lotnisko i transport</p>
-            <a href="/decks/3" class="btn btn-outline">Ucz się</a>
-        </article>
-
-        <article class="card">
-            <header class="card-tags">
-                <span class="badge">DE</span>
-                <span class="badge">Level A1</span>
-            </header>
-            <h2 class="card-title">German Verbs</h2>
-            <p class="card-meta">50 kart · Czasowniki nieregularne</p>
-            <a href="/decks/1" class="btn btn-outline">Ucz się</a>
-        </article>
-
-        <article class="card">
-            <header class="card-tags">
-                <span class="badge">IT</span>
-                <span class="badge">Level B1</span>
-            </header>
-            <h2 class="card-title">Italian Food & Dining</h2>
-            <p class="card-meta">35 kart · Gastronomia i restauracja</p>
-            <a href="/decks/1" class="btn btn-outline">Ucz się</a>
-        </article>
-
-        <article class="card">
-            <header class="card-tags">
-                <span class="badge">ES</span>
-                <span class="badge">Level B2</span>
-            </header>
-            <h2 class="card-title">Subjunctive Mood</h2>
-            <p class="card-meta">60 kart · Zaawansowana gramatyka</p>
-            <a href="/decks/1" class="btn btn-outline">Ucz się</a>
-        </article>
-    </section>
-
-    <nav class="pagination" aria-label="Paginacja">
-        <a href="/decks" class="btn btn-outline" style="width: auto; padding: 0.4rem 0.8rem; font-size: 0.85rem;">← Poprzednia</a>
-        <span class="pagination-info">Strona 1 z 4</span>
-        <a href="/decks" class="btn btn-outline" style="width: auto; padding: 0.4rem 0.8rem; font-size: 0.85rem;">Następna →</a>
+    <nav class="pagination" aria-label="Podsumowanie listy">
+        <span class="pagination-info">Łącznie talii: <?= count($decks) ?></span>
     </nav>
 </main>

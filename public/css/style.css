@@ -341,7 +341,9 @@ body {
 
 .card-tags {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .badge {
@@ -351,6 +353,33 @@ body {
   border-radius: var(--radius-sm);
   background-color: var(--color-background);
   color: var(--color-muted);
+}
+
+.badge-status {
+  margin-left: auto;
+}
+
+.badge-status-published {
+  background-color: color-mix(in srgb, #10b981 16%, var(--color-surface));
+  color: #047857;
+}
+
+.badge-status-draft {
+  background-color: color-mix(in srgb, #f59e0b 18%, var(--color-surface));
+  color: #b45309;
+}
+
+.badge-status-archived {
+  background-color: var(--color-background);
+  color: var(--color-muted);
+}
+
+[data-theme="dark"] .badge-status-published {
+  color: #34d399;
+}
+
+[data-theme="dark"] .badge-status-draft {
+  color: #fbbf24;
 }
 
 .card-title {
@@ -461,6 +490,21 @@ a:focus-visible {
   gap: var(--space-1);
 }
 
+.page-header-row {
+  gap: var(--space-2);
+}
+
+.page-header-row .btn {
+  width: auto;
+  align-self: flex-start;
+}
+
+.empty-state {
+  text-align: center;
+  align-items: center;
+  padding: var(--space-4);
+}
+
 .page-title {
   font-size: clamp(1.35rem, 3vw, 1.75rem);
   font-weight: 700;
@@ -551,6 +595,16 @@ a:focus-visible {
 }
 
 @media (min-width: 48rem) {
+  .page-header-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .page-header-row .btn {
+    align-self: center;
+  }
+
   .filters-row {
     flex-direction: row;
     align-items: center;
