@@ -3,6 +3,7 @@
 use App\Model\Deck;
 
 /** @var Deck $deck */
+$deckId = (int) $deck->getId();
 $languageLabels = Deck::ALLOWED_LANGUAGES;
 $statusLabels = Deck::ALLOWED_STATUSES;
 $language = $deck->getLanguage();
@@ -41,7 +42,7 @@ $description = $deck->getDescription();
         </article>
 
         <section class="rating-section" aria-label="Ocena zapamiętania słówka">
-            <form action="/decks/<?= (int) $deck->getId() ?>" method="post" class="rating-grid">
+            <form action="/decks/<?= $deckId ?>" method="post" class="rating-grid">
                 <button type="submit" name="rating" value="again" class="btn-rate btn-rate-again">Powtórz (1)</button>
                 <button type="submit" name="rating" value="hard" class="btn-rate btn-rate-hard">Trudne (2)</button>
                 <button type="submit" name="rating" value="good" class="btn-rate btn-rate-good">Dobre (3)</button>

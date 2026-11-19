@@ -31,14 +31,13 @@ final class DeckRepository implements DeckRepositoryInterface
     }
 
     /** @return list<Deck> */
-    public function findRecentPublished(int $limit = 3): array
+    public function findRecent(int $limit = 6): array
     {
         $statement = $this->database->prepare(
-            "SELECT id, title, description, language, cefr_level, status, created_at, updated_at
+            'SELECT id, title, description, language, cefr_level, status, created_at, updated_at
              FROM decks
-             WHERE status = 'published'
              ORDER BY created_at DESC, id DESC
-             LIMIT :limit"
+             LIMIT :limit'
         );
         $statement->bindValue(':limit', max(1, $limit), PDO::PARAM_INT);
         $statement->execute();

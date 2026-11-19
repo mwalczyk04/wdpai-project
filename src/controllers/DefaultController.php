@@ -17,7 +17,7 @@ final class DefaultController extends AppController
 
     public function index(): void
     {
-        $recentDecks = $this->deckRepository->findRecentPublished(3);
+        $recentDecks = $this->deckRepository->findRecent(6);
 
         $this->render('home', [
             'pageTitle' => 'VocabHub — Pulpit',

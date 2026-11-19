@@ -4,10 +4,22 @@ use App\Model\Deck;
 
 $recentDecks = is_array($recentDecks ?? null) ? $recentDecks : [];
 $languageLabels = Deck::ALLOWED_LANGUAGES;
-$firstDeck = $recentDecks[0] ?? null;
-$primaryStudyUrl = $firstDeck instanceof Deck ? '/decks/' . (int) $firstDeck->getId() : '/decks/create';
-$primaryStudyLabel = $firstDeck instanceof Deck ? 'Rozpocznij powtórkę →' : 'Utwórz pierwszą talię →';
-$minigameUrl = $firstDeck instanceof Deck ? '/decks/' . (int) $firstDeck->getId() : '/decks';
+$statusLabels = Deck::ALLOWED_STATUSES;
+
+$primaryDeck = null;
+foreach ($recentDecks as $candidate) {
+    if ($candidate instanceof Deck && $candidate->getStatus() === 'published') {
+        $primaryDeck = $candidate;
+        break;
+    }
+}
+if ($primaryDeck === null && isset($recentDecks[0]) && $recentDecks[0] instanceof Deck) {
+    $primaryDeck = $recentDecks[0];
+}
+
+$primaryStudyUrl = $primaryDeck instanceof Deck ? '/decks/' . (int) $primaryDeck->getId() : '/decks/create';
+$primaryStudyLabel = $primaryDeck instanceof Deck ? 'Rozpocznij powtórkę →' : 'Utwórz pierwszą talię →';
+$minigameUrl = $primaryDeck instanceof Deck ? '/decks/' . (int) $primaryDeck->getId() : '/decks';
 ?>
 <main class="container main-content">
     <section class="hero-card" aria-labelledby="welcome-heading">
@@ -27,8 +39,8 @@ $minigameUrl = $firstDeck instanceof Deck ? '/decks/' . (int) $firstDeck->getId(
 
         <?php if ($recentDecks === []): ?>
             <article class="card empty-state">
-                <h3 class="card-title">Brak opublikowanych talii</h3>
-                <p class="card-meta">Utwórz i opublikuj pierwszą talię, aby pojawiła się na pulpicie.</p>
+                <h3 class="card-title">Brak zapisanych talii</h3>
+                <p class="card-meta">Utwórz pierwszą talię, aby pojawiła się na Twoim pulpicie.</p>
                 <div>
                     <a href="/decks/create" class="btn btn-primary">+ Utwórz talię</a>
                 </div>
@@ -37,21 +49,41 @@ $minigameUrl = $firstDeck instanceof Deck ? '/decks/' . (int) $firstDeck->getId(
             <div class="deck-grid">
                 <?php foreach ($recentDecks as $deck): ?>
                     <?php
+                    $deckId = (int) $deck->getId();
                     $language = $deck->getLanguage();
                     $languageLabel = $languageLabels[$language] ?? strtoupper($language);
+                    $status = $deck->getStatus();
+                    $statusLabel = $statusLabels[$status] ?? $status;
+                    $statusClass = match ($status) {
+                        'published' => 'badge-status-published',
+                        'draft' => 'badge-status-draft',
+                        'archived' => 'badge-status-archived',
+                        default => '',
+                    };
                     $description = $deck->getDescription();
                     ?>
                     <article class="card">
                         <header class="card-tags">
                             <span class="badge"><?= htmlspecialchars(strtoupper($language), ENT_QUOTES, 'UTF-8') ?></span>
                             <span class="badge">Level <?= htmlspecialchars($deck->getCefrLevel(), ENT_QUOTES, 'UTF-8') ?></span>
+                            <div class="card-tag-actions">
+                                <span class="badge <?= $statusClass ?>"><?= htmlspecialchars($statusLabel, ENT_QUOTES, 'UTF-8') ?></span>
+                                <a
+                                    href="/decks/<?= $deckId ?>/edit"
+                                    class="card-edit-link"
+                                    aria-label="Edytuj talię <?= htmlspecialchars($deck->getTitle(), ENT_QUOTES, 'UTF-8') ?>"
+                                    title="Edytuj talię"
+                                >
+                                    <i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
+                                </a>
+                            </div>
                         </header>
                         <h3 class="card-title"><?= htmlspecialchars($deck->getTitle(), ENT_QUOTES, 'UTF-8') ?></h3>
                         <p class="card-meta">
                             <?= htmlspecialchars($languageLabel, ENT_QUOTES, 'UTF-8') ?> ·
                             <?= htmlspecialchars($description !== null && $description !== '' ? $description : 'Brak opisu', ENT_QUOTES, 'UTF-8') ?>
                         </p>
-                        <a href="/decks/<?= (int) $deck->getId() ?>" class="btn btn-outline">Ucz się</a>
+                        <a href="/decks/<?= $deckId ?>" class="btn btn-outline card-study-btn">Ucz się</a>
                     </article>
                 <?php endforeach; ?>
             </div>

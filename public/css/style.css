@@ -318,6 +318,10 @@ body {
   width: 100%;
 }
 
+.btn-outline.btn-sm {
+  width: auto;
+}
+
 .section-header {
   display: flex;
   align-items: center;
@@ -359,6 +363,30 @@ body {
   margin-left: auto;
 }
 
+.card-tag-actions {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.card-edit-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.card-edit-link:hover {
+  color: var(--color-brand);
+  background-color: var(--color-brand-subtle);
+}
+
 .badge-status-published {
   background-color: color-mix(in srgb, #10b981 16%, var(--color-surface));
   color: #047857;
@@ -389,6 +417,45 @@ body {
 .card-meta {
   color: var(--color-muted);
   font-size: 0.875rem;
+}
+
+.card-study-btn {
+  margin-top: auto;
+}
+
+.inline-action-form {
+  margin: 0;
+  display: inline-flex;
+}
+
+.btn-danger-outline {
+  color: #ef4444;
+  border-color: color-mix(in srgb, #ef4444 35%, var(--color-border));
+}
+
+.btn-danger-outline:hover {
+  background-color: color-mix(in srgb, #ef4444 10%, transparent);
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+.form-errors {
+  background-color: color-mix(in srgb, #ef4444 12%, var(--color-surface));
+  border: 1px solid color-mix(in srgb, #ef4444 45%, var(--color-border));
+  border-radius: var(--radius-md);
+  color: #b91c1c;
+  padding: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-3);
+  font-size: 0.875rem;
+}
+
+[data-theme="dark"] .form-errors {
+  color: #fca5a5;
+}
+
+.form-errors ul {
+  margin-top: 0.4rem;
+  padding-left: 1.25rem;
 }
 
 .forum-preview-list {

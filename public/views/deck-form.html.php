@@ -4,16 +4,20 @@ $errors = is_array($errors ?? null) ? $errors : [];
 $languages = is_array($languages ?? null) ? $languages : [];
 $cefrLevels = is_array($cefrLevels ?? null) ? $cefrLevels : [];
 $statuses = is_array($statuses ?? null) ? $statuses : [];
+$formHeading = (string) ($formHeading ?? 'Utwórz nową talię');
+$formAction = (string) ($formAction ?? '/decks/create');
+$cancelUrl = (string) ($cancelUrl ?? '/decks');
+$submitLabel = (string) ($submitLabel ?? 'Zapisz talię');
 ?>
 <main class="container main-content">
-    <form method="post" action="/decks/create">
+    <form method="post" action="<?= htmlspecialchars($formAction, ENT_QUOTES, 'UTF-8') ?>">
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars((string) ($csrfToken ?? ''), ENT_QUOTES, 'UTF-8') ?>">
 
         <div class="deck-create-header">
-            <h1 class="page-title">Utwórz nową talię</h1>
+            <h1 class="page-title"><?= htmlspecialchars($formHeading, ENT_QUOTES, 'UTF-8') ?></h1>
             <div class="deck-create-actions">
-                <a href="/decks" class="btn btn-outline" style="width: auto;">Anuluj</a>
-                <button type="submit" class="btn btn-primary">Zapisz talię</button>
+                <a href="<?= htmlspecialchars($cancelUrl, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-outline" style="width: auto;">Anuluj</a>
+                <button type="submit" class="btn btn-primary"><?= htmlspecialchars($submitLabel, ENT_QUOTES, 'UTF-8') ?></button>
             </div>
         </div>
 
@@ -132,4 +136,24 @@ $statuses = is_array($statuses ?? null) ? $statuses : [];
             </div>
         </section>
     </form>
+
+    <?php if (!empty($deleteAction) && !empty($deleteCsrfToken)): ?>
+        <section class="form-box form-danger-box" aria-labelledby="danger-zone-heading">
+            <div class="danger-box-row">
+                <div>
+                    <h2 id="danger-zone-heading" class="form-box-title">Strefa niebezpieczna</h2>
+                    <p class="card-meta">Usunięcie talii trwale usunie ją z bazy danych PostgreSQL.</p>
+                </div>
+                <form
+                    method="post"
+                    action="<?= htmlspecialchars((string) $deleteAction, ENT_QUOTES, 'UTF-8') ?>"
+                    class="inline-action-form"
+                    onsubmit="return confirm('Czy na pewno chcesz trwale usunąć tę talię?');"
+                >
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars((string) $deleteCsrfToken, ENT_QUOTES, 'UTF-8') ?>">
+                    <button type="submit" class="btn btn-outline btn-sm btn-danger-outline">Usuń talię</button>
+                </form>
+            </div>
+        </section>
+    <?php endif; ?>
 </main>

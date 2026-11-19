@@ -3,6 +3,7 @@
 use App\Model\Deck;
 
 $decks = is_array($decks ?? null) ? $decks : [];
+$errors = is_array($errors ?? null) ? $errors : [];
 $statusLabels = Deck::ALLOWED_STATUSES;
 $languageLabels = Deck::ALLOWED_LANGUAGES;
 ?>
@@ -14,6 +15,17 @@ $languageLabels = Deck::ALLOWED_LANGUAGES;
         </div>
         <a href="/decks/create" class="btn btn-primary">+ Utwórz talię</a>
     </header>
+
+    <?php if ($errors !== []): ?>
+        <div class="form-errors" role="alert">
+            <strong>Wystąpił problem:</strong>
+            <ul>
+                <?php foreach ($errors as $error): ?>
+                    <li><?= htmlspecialchars((string) $error, ENT_QUOTES, 'UTF-8') ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 
     <section class="catalog-toolbar" aria-label="Wyszukiwarka i filtry">
         <div class="search-wrapper">
@@ -85,7 +97,7 @@ $languageLabels = Deck::ALLOWED_LANGUAGES;
                         <?= htmlspecialchars($languageLabel, ENT_QUOTES, 'UTF-8') ?> ·
                         <?= htmlspecialchars($description !== null && $description !== '' ? $description : 'Brak opisu', ENT_QUOTES, 'UTF-8') ?>
                     </p>
-                    <a href="/decks/<?= (int) $deck->getId() ?>" class="btn btn-outline">Ucz się</a>
+                    <a href="/decks/<?= (int) $deck->getId() ?>" class="btn btn-outline card-study-btn">Ucz się</a>
                 </article>
             <?php endforeach; ?>
         </section>
